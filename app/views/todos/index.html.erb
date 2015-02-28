@@ -1,0 +1,58 @@
+<title>My First Todo App</title>
+	<div class="container">
+		<div class="row">
+			<div class="span5">
+			<h1> My First Todo App </h1>
+			<hr>
+			<%= form_for @todo, :url => {:action => "add"} do |f| %>
+				
+				<div class="field"><%= f.text_field :todo_item %></div>
+				<div class="field"><%= f.submit "Add Todo Task", :class => "btn btn-primary"%></div>
+				
+				<% end %>
+					<% if flash[:error] %>
+						<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert" >×</button>
+						<strong><%= flash[:error] %></strong>
+						</div>
+					<% end %>
+					<% if flash[:success] %>
+						<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert" >×</button>
+						<strong><%= flash[:success] %></strong>
+						</div>
+					<% end %>
+			<h3> List of the tasks</h3>
+			<% if flash[:msg] %>
+						<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert" >×</button>
+						<strong><%= flash[:msg] %></strong>
+						</div>
+			<% end %>
+				<div class="well">
+				<table style="width:100%">
+					<tr>
+						<th>Todo Tasks</th>
+						<th colspan="2">Actions</th>
+					</tr>
+					<%= form_tag("/todos/complete/", :method => "post") do %>
+					<% @todo_list.each do |i| %>
+					<% if i.completed == true %>
+					<tr>
+					<td><style="color:grey;"> <%= check_box_tag "todos_checkbox[]", i.id %><del> <%= i.todo_item %></del> </td>
+					<% else %>
+					<td><%= check_box_tag "todos_checkbox[]", i.id %> <%= i.todo_item %> </td>
+					<% end %>
+					<td> </td>
+					<td><%= link_to "Delete", delete_path(i) %></td>
+					</tr>
+					<%  end %>
+				</table>
+				<div class="field"><%= submit_tag "Complete Selected Tasks", :class => "btn btn-primary" %></div>
+					<% end %>
+				</div>
+      </div>
+     </div>
+    </div>
+
+

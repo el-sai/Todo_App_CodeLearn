@@ -1,0 +1,32 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 3px;
+    text-align: left;    
+}
+</style>
+  <title>Todo App Codelearn</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application'%>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="/todos/index"> ToDo Application </a>
+    </div>
+  </div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<%= yield %>
+
+</body>
+</html>
